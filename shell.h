@@ -36,9 +36,9 @@ void _printError(info_t *info, char *error_type);
 void _removeComments(char *buf);
 
 /*_builtin1.c*/
-int _myexit(info_t *info);
-int _mycd(info_t *info);
-int _myhelp(info_t *info);
+int _myExit(info_t *info);
+int _myCd(info_t *info);
+int _myHelp(info_t *info);
 
 /*_builtin2.c*/
 int _myHistory(info_t *info);
