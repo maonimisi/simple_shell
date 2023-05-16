@@ -151,7 +151,7 @@ typedef struct program_info
 	char *_args;
 	char **_argv;
 	char *_path;
-	int _argct;
+	int _argc;
 	unsigned int _lineCount;
 	int _errorNumber;
 	int _countLine;
