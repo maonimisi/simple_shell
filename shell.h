@@ -65,7 +65,6 @@ void _clearInfoStruct(info_t *info);
 void _setInfoStruct(info_t *info, char **argument_vector);
 void _freeInfoStruct(info_t *info, int free_all);
 
-
 /*_getline.c*/
 ssize_t _inputBuf(info_t *info, char **buffer, size_t *buffer_len);
 ssize_t _getInput(info_t *info);
@@ -80,6 +79,47 @@ int _renumberHistory(info_t *info);
 int _readHistory(info_t *info);
 int _addHistoryEntry(info_t *info, char *buffer, int line_count);
 int _renumberHistory(info_t *info);
+
+/*_string1.c*/
+int _strlen(char *s);
+char *_strcat(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+char *_startsWith(const char *haystack, const char *needle);
+
+/*_string2.c*/
+char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+void _puts(char *str);
+int _putchar(char c);
+
+/*_realloc.c*/
+char *_memset(char *s, char b, unsigned int n);
+int _bfree(void **ptr);
+void _ffree(char **pp);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+
+/*_list1.c*/
+list_t *_addNode(list_t **head, const char *str, int num);
+list_t *_addNodeEnd(list_t **head, const char *str, int num);
+int _deleteNodeAtIndex(list_t **head, unsigned int index);
+size_t _printListStr(const list_t *h);
+void _freeList(list_t *head);
+
+/*_list2.c*/
+size_t _listLen(const list_t *h);
+char **_listToStrings(list_t *head);
+size_t _printList(const list_t *h);
+list_t *_nodeStartsWith(list_t *node, char *prefix, char c);
+ssize_t _getNodeIndex(list_t *head, list_t *node);
+
+/*_path.c*/
+int _isExecutableCommand(info_t *info, char *path);
+char *_duplicateCharacters(char *source, int start, int end);
+char *_findCommandPath(info_t *info, char *path_string, char *command);
+
+/*_tokenize.c*/
+char **_splitString(char *str, char *delim);
+char **_splitStringBySingleDelim(char *str, char delim);
 
 /*read/write buffers */
 #define READ_BUF_SIZE 1024
