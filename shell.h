@@ -18,7 +18,7 @@ int _isdelimeter(char c, char *delimeter);
 int _isAlpha(int c);
 int _atoi(char *s);
 
-/*_exit.c*/
+/*_string3.c*/
 char *_strncpy(char *destination, char *source, int max_len);
 char *_strncat(char *destination, char *source, int max_len);
 char *_strchr(char *str, char character);
