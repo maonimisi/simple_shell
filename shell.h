@@ -121,6 +121,14 @@ char *_findCommandPath(info_t *info, char *path_string, char *command);
 char **_splitString(char *str, char *delim);
 char **_splitStringBySingleDelim(char *str, char delim);
 
+/*_vars.c*/
+int _isChainDelimiter(info_t *info, char *buf, size_t *p);
+void _checkChainContinuation(info_t *info, char *buf, size_t *p, size_t
+				start_pos, size_t buf_len);
+int _replaceAlias(info_t *info);
+int _replaceVars(info_t *info);
+int _replaceString(char **old_str, char *new_str);
+
 /*read/write buffers */
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
