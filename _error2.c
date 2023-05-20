@@ -73,11 +73,11 @@ int _printDecimal(int input, int fd)
  */
 void _printError(info_t *info, char *error_type)
 {
-	_eputs(info->fname);
+	_eputs(info->_filename);
 	_eputs(": ");
-	_printDecimal(info->line_count, STDERR_FILENO);
+	_printDecimal(info->_lineCount, STDERR_FILENO);
 	_eputs(": ");
-	_eputs(info->argv[0]);
+	_eputs(info->_argv[0]);
 	_eputs(": ");
 	_eputs(error_type);
 }
@@ -97,4 +97,39 @@ void _removeComments(char *buf)
 			buf[index] = '\0';
 			break;
 		}
+}
+
+/**
+ * _convertNumber - Function converter, a clone of itoa
+ * @num: number
+ * @base: base
+ * @flags: argument flags
+ * Return: string
+ */
+char *_convertNumber(long int num, int base, int flags)
+{
+	static char *array;
+	static char buffer[50];
+	char sign = 0;
+	char *ptr;
+	unsigned long n = num;
+
+	if (!(flags & CONVERT_UNSIGNED) && num < 0)
+	{
+		n = -num;
+		sign = '-';
+
+	}
+	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	ptr = &buffer[49];
+	*ptr = '\0';
+
+	do	{
+		*--ptr = array[n % base];
+		n /= base;
+	} while (n != 0);
+
+	if (sign)
+		*--ptr = sign;
+	return (ptr);
 }

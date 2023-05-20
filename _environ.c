@@ -41,12 +41,12 @@ char *_getEnv(info_t *info, const char *name)
  */
 int _mySetEnv(info_t *info)
 {
-	if (info->argc != 3)
+	if (info->_argc != 3)
 	{
 		_eputs("Incorrect number of arguments\n");
 		return (1);
 	}
-	if (_setEnv(info, info->argv[1], info->argv[2]))
+	if (_setEnv(info, info->_argv[1], info->_argv[2]))
 		return (0);
 	return (1);
 }
@@ -61,13 +61,13 @@ int _myUnsetEnv(info_t *info)
 {
 	int i;
 
-	if (info->argc == 1)
+	if (info->_argc == 1)
 	{
 		_eputs("Too few arguments.\n");
 		return (1);
 	}
-	for (i = 1; i < info->argc; i++)
-		_unSetEnv(info, info->argv[i]);
+	for (i = 1; i < info->_argc; i++)
+		_unSetEnv(info, info->_argv[i]);
 
 	return (0);
 }

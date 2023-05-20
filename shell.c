@@ -34,10 +34,10 @@ int main(int argc, char **argv)
 			}
 			return (EXIT_FAILURE);
 		}
-		info->readfd = file_descriptor;
+		info->_readFileDescriptor = file_descriptor;
 	}
 	_populateEnvList(info);
 	_readHistory(info);
-	_hsh(info, argv);
+	_executeCommand(info, argv);
 	return (EXIT_SUCCESS);
 }

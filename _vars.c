@@ -53,7 +53,7 @@ void _checkChainContinuation(info_t *info, char *buf, size_t *p, size_t
 
 	if (info->_commandBufferType == CMD_AND)
 	{
-		if (info->status)
+		if (info->_status)
 		{
 			buf[start_pos] = '\0';
 			current_pos = buf_len;
@@ -84,17 +84,17 @@ int _replaceAlias(info_t *info)
 
 	for (i = 0; i < 10; i++)
 	{
-		alias_node = _nodeStartsWith(info->alias, info->argv[0], '=');
+		alias_node = _nodeStartsWith(info->_alias, info->_argv[0], '=');
 		if (!alias_node)
 			return (0);
-		free(info->argv[0]);
+		free(info->_argv[0]);
 		p = _strchr(alias_node->str, '=');
 		if (!p)
 			return (0);
 		p = _strdup(p + 1);
 		if (!p)
 			return (0);
-		info->argv[0] = p;
+		info->_argv[0] = p;
 	}
 	return (1);
 }
@@ -110,31 +110,31 @@ int _replaceVars(info_t *info)
 	int i = 0;
 	list_t *env_node;
 
-	for (i = 0; info->argv[i]; i++)
+	for (i = 0; info->_argv[i]; i++)
 	{
-		if (info->argv[i][0] != '$' || !info->argv[i][1])
+		if (info->_argv[i][0] != '$' || !info->_argv[i][1])
 			continue;
 
-		if (!_strcmp(info->argv[i], "$?"))
+		if (!_strcmp(info->_argv[i], "$?"))
 		{
-			_replaceString(&(info->argv[i]),
-				_strdup(convert_number(info->status, 10, 0)));
+			_replaceString(&(info->_argv[i]),
+				_strdup(_convertNumber(info->_status, 10, 0)));
 			continue;
 		}
-		if (!_strcmp(info->argv[i], "$$"))
+		if (!_strcmp(info->_argv[i], "$$"))
 		{
-			_replaceString(&(info->argv[i]),
-				_strdup(convert_number(getpid(), 10, 0)));
+			_replaceString(&(info->_argv[i]),
+				_strdup(_convertNumber(getpid(), 10, 0)));
 			continue;
 		}
-		env_node = _nodeStartsWith(info->envp, &(info->argv[i][1]), '=');
+		env_node = _nodeStartsWith(info->_envp, &(info->_argv[i][1]), '=');
 		if (env_node)
 		{
-			_replaceString(&(info->argv[i]),
+			_replaceString(&(info->_argv[i]),
 				_strdup(_strchr(env_node->str, '=') + 1));
 			continue;
 		}
-		_replaceString(&info->argv[i], _strdup(""));
+		_replaceString(&info->_argv[i], _strdup(""));
 
 	}
 	return (0);

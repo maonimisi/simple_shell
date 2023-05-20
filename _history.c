@@ -67,7 +67,7 @@ int _renumberHistory(info_t *info)
 		node->num = new_histcount++;
 		node = node->next;
 	}
-	return (info->histcount = new_histcount);
+	return (info->_historyCount = new_histcount);
 }
 
 /**
@@ -115,7 +115,7 @@ int _readHistory(info_t *info)
 	while (info->histcount-- >= HIST_MAX)
 		_deleteNodeAtIndex(&(info->history), 0);
 	_renumberHistory(info);
-	return (info->histcount);
+	return (info->_historyCount);
 }
 
 /**
@@ -138,20 +138,3 @@ int _addHistoryEntry(info_t *info, char *buffer, int line_count)
 	return (0);
 }
 
-/**
- * _renumberHistory - Renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- * Return: Function return the new histcount
- */
-int _renumberHistory(info_t *info)
-{
-	list_t *node = info->_history;
-	int new_histcount = 0;
-
-	while (node)
-	{
-		node->num = new_histcount++;
-		node = node->next;
-	}
-	return (info->histcount = new_histcount);
-}

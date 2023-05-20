@@ -89,7 +89,7 @@ int _myAlias(info_t *info)
 	char *equal_sign = NULL;
 	list_t *alias_node = NULL;
 
-	if (info->argc == 1)
+	if (info->_argc == 1)
 	{
 		alias_node = info->_alias;
 		while (alias_node)
@@ -100,13 +100,13 @@ int _myAlias(info_t *info)
 		return (0);
 	}
 
-	for (i = 1; info->argv[i]; i++)
+	for (i = 1; info->_argv[i]; i++)
 	{
-		equal_sign = _strchr(info->argv[i], '=');
+		equal_sign = _strchr(info->_argv[i], '=');
 		if (equal_sign)
-			_setAlias(info, info->argv[i]);
+			_setAlias(info, info->_argv[i]);
 		else
-			_printAlias(_nodeStartsWith(info->_alias, info->argv[i], '='));
+			_printAlias(_nodeStartsWith(info->_alias, info->_argv[i], '='));
 	}
 
 	return (0);

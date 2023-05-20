@@ -53,7 +53,7 @@ ssize_t _getInput(info_t *info)
 	static char *buffer;
 	static size_t buffer_start, buffer_end, buffer_len;
 	ssize_t bytes_read = 0;
-	char **buffer_ptr = &(info->args), *p;
+	char **buffer_ptr = &(info->_args), *p;
 
 	_putchar(BUF_FLUSH);
 	bytes_read = _inputBuf(info, &buffer, &buffer_len);
@@ -102,7 +102,7 @@ ssize_t _readBuffer(info_t *info, char *buffer, size_t *buffer_size)
 
 	if (*buffer_size)
 		return (0);
-	bytes_read = read(info->readFileDescriptor, buffer, READ_BUF_SIZE);
+	bytes_read = read(info->_readFileDescriptor, buffer, READ_BUF_SIZE);
 	if (bytes_read >= 0)
 		*buffer_size = bytes_read;
 	return (bytes_read);
