@@ -52,12 +52,13 @@ void _findCommand(info_t *info)
 		info->_lineCount++;
 		info->_countLine = 0;
 	}
-
-	num_args = count_args(info->_args);
-	if (num_args == 0)
+	for (i = 0, num_args  = 0; info->_args[i]; i++)
+		if (!_isDelimeter(info->_args[i], " \t\n"))
+			num_args++;
+	if (!num_args)
 		return;
 
-	path = _findPath(info, _getEnv(info, "PATH="), info->_argv[0]);
+	path = _findCommandPath(info, _getEnv(info, "PATH="), info->_argv[0]);
 	if (path)
 	{
 		info->_path = path;
@@ -65,8 +66,8 @@ void _findCommand(info_t *info)
 	}
 	else
 	{
-		if ((_isInteractive(info) || _getEnv(info, "PATH=")
-				|| info->_argv[0][0] == '/') && _isCommand(info, info->argv[0]))
+		if ((_isInteractive(info) || _getEnv(info, "PATH=") || info->_argv[0][0]
+			== '/') && _isExecutableCommand(info, info->_argv[0]))
 			_forkCommand(info);
 		else if (*(info->_args) != '\n')
 		{

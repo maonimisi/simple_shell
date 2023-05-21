@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * _getEnvironmentStrings - Function returns a copy of the environment strings
  * @info: Structure containing arguments
@@ -7,13 +6,13 @@
  */
 char **_getEnvironmentStrings(info_t *info)
 {
-	if (!info->environ || info->_changedEnvp)
+	if (!info->_commandBuffer || info->_changedEnvp)
 	{
-		info->environ = _listToStringArray(info->_envp);
+		info->_commandBuffer = _listToStrings(info->_envp);
 		info->_changedEnvp = 0;
 	}
 
-	return (info->environ);
+	return (info->_commandBuffer);
 }
 
 /**

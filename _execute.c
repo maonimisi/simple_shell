@@ -12,21 +12,21 @@ int _executeCommand(info_t *info, char **argv)
 
 	while (read_result != -1 && builtin_ret != -2)
 	{
-		clear_info(info);
+		_clearInfoStruct(info);
 		if (_isInteractive(info))
 			_puts("$ ");
 		_eputchar(BUF_FLUSH);
 		read_result = _getInput(info);
 		if (read_result != -1)
 		{
-			_setInfo(info, argv);
+			_setInfoStruct(info, argv);
 			builtin_ret = _findBuiltin(info);
 			if (builtin_ret == -1)
 				_findCommand(info);
 		}
 		else if (_isInteractive(info))
 			_putchar('\n');
-		__freeInfoStruct(info, 0);
+		_freeInfoStruct(info, 0);
 	}
 	_writeHistory(info);
 	_freeInfoStruct(info, 1);

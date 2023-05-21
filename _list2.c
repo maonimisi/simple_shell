@@ -25,7 +25,7 @@ size_t _listLen(const list_t *h)
 char **_listToStrings(list_t *head)
 {
 	list_t *node = head;
-	size_t i = list_len(head), j;
+	size_t i = _listLen(head), j;
 	char **strs;
 	char *str;
 
@@ -64,7 +64,7 @@ size_t _printList(const list_t *h)
 
 	while (h)
 	{
-		_puts(convert_number(h->num, 10, 0));
+		_puts(_convertNumber(h->num, 10, 0));
 		_putchar(':');
 		_putchar(' ');
 		_puts(h->str ? h->str : "(nil)");

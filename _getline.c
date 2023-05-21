@@ -16,11 +16,11 @@ ssize_t _inputBuf(info_t *info, char **buffer, size_t *buffer_len)
 	{
 		free(*buffer);
 		*buffer = NULL;
-		signal(SIGINT, siginthandler);
+		signal(SIGINT, _siginthandler);
 #if USE_GETLINE
 		bytes_read = getline(buffer, &len_p, stdin);
 #else
-		bytes_read = _getline(info, buffer, &len_p);
+		bytes_read = _getLine(info, buffer, &len_p);
 #endif
 		if (bytes_read > 0)
 		{
@@ -64,10 +64,10 @@ ssize_t _getInput(info_t *info)
 		buffer_end = buffer_start;
 		p = buffer + buffer_start;
 
-		_checkChain(info, buffer, &buffer_end, buffer_start, buffer_len);
+		_checkChainContinuation(info, buffer, &buffer_end, buffer_start, buffer_len);
 		while (buffer_end < buffer_len)
 		{
-			if (_isChain(info, buffer, &buffer_end))
+			if (_isChainDelimiter(info, buffer, &buffer_end))
 				break;
 			buffer_end++;
 		}
@@ -118,7 +118,7 @@ ssize_t _readBuffer(info_t *info, char *buffer, size_t *buffer_size)
 int _getLine(info_t *info, char **buffer_ptr, size_t *buffer_length)
 {
 	static char buffer[READ_BUF_SIZE];
-	static size_t buffer_start, buffer_end, buffer_size;
+	static size_t buffer_start, buffer_size;
 	size_t k;
 	ssize_t bytes_read = 0, line_length = 0;
 	char *buffer_start_ptr = NULL, *new_buffer_ptr = NULL, *c;

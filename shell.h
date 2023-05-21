@@ -172,6 +172,7 @@ int _writeHistory(info_t *info);
 int _renumberHistory(info_t *info);
 int _readHistory(info_t *info);
 int _addHistoryEntry(info_t *info, char *buffer, int line_count);
+int _buildHistoryList(info_t *info, char *buf, int linecount);
 
 /*_string1.c*/
 int _strlen(char *s);
@@ -181,7 +182,7 @@ char *_startsWith(const char *haystack, const char *needle);
 
 /*_string2.c*/
 char *_strcpy(char *dest, char *src);
-char *_strdup(char *str);
+char *_strdup(const char *str);
 void _puts(char *str);
 int _putchar(char c);
 
@@ -201,7 +202,7 @@ list_t *_addNode(list_t **head, const char *str, int num);
 list_t *_addNodeEnd(list_t **head, const char *str, int num);
 int _deleteNodeAtIndex(list_t **head, unsigned int index);
 size_t _printListStr(const list_t *h);
-void _freeList(list_t *head);
+void _freeList(list_t **head_ptr);
 
 /*_list2.c*/
 size_t _listLen(const list_t *h);

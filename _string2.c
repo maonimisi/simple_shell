@@ -21,7 +21,7 @@ char *_strcpy(char *dest, char *src)
  * Return: returns a pointer to the duplicate memory
  */
 
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
 	int i, len = 0;
 	char *copy;

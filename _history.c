@@ -10,7 +10,7 @@ char *_getHistoryFile(info_t *info)
 {
 	char *buffer, *home_directory;
 
-	home_directory = _getenv(info, "HOME=");
+	home_directory = _getEnv(info, "HOME=");
 	if (!home_directory)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (_strlen(home_directory) +
@@ -47,7 +47,7 @@ int _writeHistory(info_t *info)
 		_putsFileDescriptor(node->str, file_descriptor);
 		_putFileDescriptor('\n', file_descriptor);
 	}
-	_puFileDescriptor(BUF_FLUSH, file_descriptor);
+	_putFileDescriptor(BUF_FLUSH, file_descriptor);
 	close(file_descriptor);
 	return (1);
 }
@@ -68,6 +68,26 @@ int _renumberHistory(info_t *info)
 		node = node->next;
 	}
 	return (info->_historyCount = new_histcount);
+}
+
+/**
+ * _buildHistoryList - Function adds entry to a history linked list
+ * @info: Structure containing potential arguments. Used to maintain
+ * @buf: buffer
+ * @linecount: Return the history linecount, histcount
+ * Return: Always 0
+ */
+int _buildHistoryList(info_t *info, char *buf, int linecount)
+{
+	list_t *node = NULL;
+
+	if (info->_history)
+		node = info->_history;
+	_addNodeEnd(&node, buf, linecount);
+
+	if (!info->_history)
+		info->_history = node;
+	return (0);
 }
 
 /**
@@ -111,9 +131,9 @@ int _readHistory(info_t *info)
 	if (last != i)
 		_buildHistoryList(info, buffer + last, line_count++);
 	free(buffer);
-	info->histcount = line_count;
-	while (info->histcount-- >= HIST_MAX)
-		_deleteNodeAtIndex(&(info->history), 0);
+	info->_historyCount = line_count;
+	while (info->_historyCount-- >= HIST_MAX)
+		_deleteNodeAtIndex(&(info->_history), 0);
 	_renumberHistory(info);
 	return (info->_historyCount);
 }
@@ -137,4 +157,3 @@ int _addHistoryEntry(info_t *info, char *buffer, int line_count)
 		info->_history = new_node;
 	return (0);
 }
-

@@ -134,7 +134,7 @@ size_t _printListStr(const list_t *h)
  * _freeList - Function that frees  a list_t list
  * @head: Pointer to  a struct
  */
-void _freeList(list_t *head)
+void _freeList(list_t **head_ptr)
 {
 	list_t *node, *next_node, *head;
 
