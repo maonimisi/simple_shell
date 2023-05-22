@@ -145,7 +145,26 @@ int _readHistory(info_t *info)
  * @line_count: Return the line count of the history entry
  * Return: Always 0
  */
-int _addHistoryEntry(info_t *info, char *buffer, int line_count)
+
+int addHistoryEntry(struct info *info, char *buffer, int line_count)
+{
+	struct list_node *new_node = malloc(sizeof(struct list_node));
+	if (new_node == NULL)
+		return -1;
+	new_node->buffer = strdup(buffer);
+	new_node->line_count = line_count;
+	new_node->next = NULL;
+	if (info->_history == NULL)
+		info->_history = new_node;
+	else
+		struct list_node *current_node = info->_history;
+	while (current_node->next != NULL)
+		current_node = current_node->next;
+	current_node->next = new_node;
+    return 0;
+}
+
+/* int _addHistoryEntry(info_t *info, char *buffer, int line_count)
 {
 	list_t *new_node = NULL;
 
@@ -156,4 +175,4 @@ int _addHistoryEntry(info_t *info, char *buffer, int line_count)
 	if (!info->_history)
 		info->_history = new_node;
 	return (0);
-}
+}*/
