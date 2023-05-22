@@ -66,12 +66,12 @@ typedef struct liststr
  * @_countLine: Flag indicating whether to count this line of input
  * @_filename: Name of the program file
  * @_envp: linked list representing the local copy of the environment variables
- * @_modifiedEnvp: Custom modified copy of the environment variables from the linked list
+ * @_modifiedEnvp: Modified copy of env vars from linked list
  * @_history: History linked list node
  * @_alias: Alias linked list node
  * @_changedEnvp: Flag indicating if the environment was changed
  * @_status: Return status of the last executed command
- * @_commandBuffer: Address of the pointer to the command buffer used for chaining commands
+ * @_commandBuffer: Ptr to command buffer for chaining commands
  * @_commandBufferType: Type of command buffer (CMD_type: ||, &&, ;)
  * @_readFileDescriptor: File descriptor used for reading line input
  * @_historyCount: Count of history line numbers
