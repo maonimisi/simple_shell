@@ -153,7 +153,7 @@ int _addHistoryEntry(info_t *info, char *buffer, int line_count)
 
 	if (info->_history)
 		new_node = info->_history;
-	_addNodeEnd(&node, buffer, line_count);
+	_addNodeEnd(&new_node, buffer, line_count);
 
 	if (!info->_history)
 		info->_history = new_node;

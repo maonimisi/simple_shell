@@ -66,12 +66,16 @@ int _myCd(info_t *info)
 	else
 		chdir_ret = chdir(info->_argv[1]);
 	if (chdir_ret == -1)
+	{
 		_printError(info, "can't cd to ");
 		_eputs(info->_argv[1]);
 		_eputchar('\n');
+	}
 	else
+	{
 		_setEnvironmentVariable(info, "OLDPWD", _getEnv(info, "PWD="));
 		_setEnvironmentVariable(info, "PWD", getcwd(buffer, 1024));
+	}
 	return (0);
 }
 
