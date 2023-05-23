@@ -22,7 +22,7 @@ The Simple Shell project aims to develop a basic shell program that can execute 
 
 #### Mohammed
 
-- **Name:** Mohammed
+- **Name:** Muhammed
 - **Role:** Software Engineer
 - **Responsibilities:**
   - Implemented the process creation and management functionalities, including forking and executing external commands.
@@ -68,6 +68,6 @@ If you wish to contribute to the project, please consider the following guidelin
 If you have any questions or need further information, feel free to contact us:
 
 - Olamide: [Successolamide46@gmail.com]
-- Mohammed: [Mabdulrasheed1210@gmail.com]
+- Muhammed: [Mabdulrasheed1210@gmail.com]
 
 Thank you for your interest and collaboration on the Simple Shell project!
