@@ -1,4 +1,4 @@
-# Collaborator Readme
+# COLLABORATOR README
 
 ## Project: Simple Shell
 
