@@ -41,15 +41,9 @@ int _myCd(info_t *info)
 	current_dir = getcwd(buffer, 1024);
 	if (!current_dir)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
+
 	if (!info->_argv[1])
-	{
 		new_dir = _getEnv(info, "HOME=");
-		if (!new_dir)
-			chdir_ret = /* TODO: what should this be? */
-				chdir((new_dir = _getEnv(info, "PWD=")) ? new_dir : "/");
-		else
-			chdir_ret = chdir(new_dir);
-	}
 	else if (_strcmp(info->_argv[1], "-") == 0)
 	{
 		if (!_getEnv(info, "OLDPWD="))
@@ -58,13 +52,12 @@ int _myCd(info_t *info)
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getEnv(info, "OLDPWD="));
-		_putchar('\n');
-		chdir_ret = /* TODO: what should this be? */
-			chdir((new_dir = _getEnv(info, "OLDPWD=")) ? new_dir : "/");
+		new_dir = _getEnv(info, "OLDPWD=");
 	}
 	else
-		chdir_ret = chdir(info->_argv[1]);
+		new_dir = info->_argv[1];
+
+	chdir_ret = chdir(new_dir);
 	if (chdir_ret == -1)
 	{
 		_printError(info, "can't cd to ");
@@ -78,6 +71,7 @@ int _myCd(info_t *info)
 	}
 	return (0);
 }
+
 
 /**
  * _myHelp - Function prints help information

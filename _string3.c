@@ -73,3 +73,25 @@ char *_strchr(char *str, char character)
 
 	return (NULL);
 }
+
+/**
+ * _addHistoryEntry - Function adds an entry to the history linked list
+ * @info: Structure containing potential arguments. Used to maintain
+ * @buffer: Buffer containing the history entry
+ * @line_count: Return the line count of the history entry
+ *
+ * Return: Always 0
+ */
+
+int _addHistoryEntry(info_t *info, char *buffer, int line_count)
+{
+	list_t *new_node = NULL;
+
+	if (info->_history)
+		new_node = info->_history;
+	_addNodeEnd(&new_node, buffer, line_count);
+
+	if (!info->_history)
+		info->_history = new_node;
+	return (0);
+}
